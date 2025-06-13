@@ -5,18 +5,30 @@ int main() {
     while (true) {  // Outer loop to return to welcome screen
         // Welcome Screen
         std::cout << "Welcome to C++ Bank!\n";
+
+        int attempt = 0;
         std::string four_digit_pin_str;
+        int four_digit_pin_int;
 
-        std::cout << "Please enter your 4-digit PIN: ";
-        std::getline(std::cin, four_digit_pin_str);
+        while (attempt < 3) {
+             std::cout << "Please enter your 4-digit PIN: ";
+             std::getline(std::cin, four_digit_pin_str);
+             four_digit_pin_int = std::stoi(four_digit_pin_str); 
 
-        int four_digit_pin_int = std::stoi(four_digit_pin_str);
-
-        if (four_digit_pin_int == 1234) {
-            std::cout << "\nWelcome back, USER!\n";
-        } else {
-            std::cout << "\nUnknown USER and PIN!\n";
-            continue; // Go back to welcome screen
+             if (four_digit_pin_int == 1234) {
+                std::cout << "Access granted!\n";
+                break;
+             } else {
+                attempt++;
+                if (attempt < 3) {
+                std:: cout << "Wrong password! Please try again: \n";
+                }
+             }
+       
+            if (attempt == 3) {
+                std::cout << "Too many failed attempts, exiting system!\n";
+                return 0;
+            }
         }
 
         // User balance (can be updated)
